@@ -1,0 +1,128 @@
+\documentclass{article}
+\usepackage[utf8]{vietnam}
+\usepackage{graphicx}    % needed for including graphics e.g. EPS, PS
+\usepackage{listings}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{tikz-cd}
+\usetikzlibrary{positioning}
+\usetikzlibrary{decorations.markings}
+\usepackage{xifthen}
+\usetikzlibrary{shapes.geometric}
+\tikzset{main node/.style={rectangle,fill=white,draw,minimum size=1cm,inner sep=0pt},}
+\tikzset{black node/.style={circle,fill=black,draw,minimum size=0.4cm,inner sep=0pt},}
+\usepackage{color}
+\usepackage{amsthm}
+\usepackage{verbatim}
+\usepackage{caption}
+\usepackage{amssymb}
+\usepackage{fullpage}
+\usepackage{mathrsfs}
+\usepackage{epstopdf}
+\usepackage{framed,color}
+\usepackage[top=1in, bottom=1in, left=1in, right=1in]{geometry}
+\usepackage{float}
+\linespread{1.3}
+\restylefloat{table}
+\usepackage[tikz]{bclogo}
+\usepackage{wrapfig}
+\usepackage[intlimits]{mathtools}
+\usepackage{indentfirst}
+\usepackage{mdframed}
+\usepackage{commath}
+\usepackage{soul}
+\usepackage{enumerate}
+\usepackage{mathabx}
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\definecolor{shadecolor}{rgb}{1,0.8,0.3}
+\topmargin -1.5cm
+\oddsidemargin -0.04cm
+\evensidemargin -0.04cm
+\textwidth 16.59cm
+\textheight 24cm
+\parskip 7.2pt
+\parindent 15pt
+\DeclareMathOperator*{\esssup}{ess\,sup}
+\newcommand*{\bigchi}{\mbox{\Large$\chi$}}% big chi
+\newtheorem{vtheorem}{Định lý}
+\newtheorem{vcorollary}{Hệ quả}
+\newtheorem{vlemma}{Bổ đề}
+\newtheorem{vproposition}{Tính chất}
+\renewcommand*{\proofname}{Chứng minh}
+\newtheorem*{vnote}{Ghi chú}
+
+\title{Notes 2 tháng 7}
+\author{Nguyễn Nga Nhi}
+
+\begin{document}
+
+\maketitle
+
+\section{Linear Regression}
+
+Eg: House picture --> Price
+
+Input: House picture
+
+Output: Price có giá trị liên tục
+
+Basis functions: $g_1, g_2, g_3, \dots$
+(diện tích, thời kì xây dựng, khoảng cách tới trung tâm, neighborhood, ... )
+
+Coordinate vector:
+$$x = [x_1, x_2, x_3]$$
+
+Linear regression:
+Tìm $w = [w_0, w_1, w_2, w_3]$
+sao cho $$y \approx \hat{y} = f(x) = w_0 + w_1 x_1 + w_2 x_2 + w_3 x_3$$
+
+Sử dụng bình phương tối thiểu $\implies$ Nghiệm của linear regression:
+$$w = A\dagger b + (\bar{X}^T\bar{X})\dagger\bar{X}^T y $$
+
+\section{Linear Classification}
+
+\subsection{Logistic Regression}
+
+Binary Classification
+
+Label: 0 or 1
+
+$Z_x$: 0 < p < 1
+
+Logistic regression: Sigmoid function
+$$f(x) = \frac{1}{1+e^{-s}}$$
+
+Sử dụng Stochastic Gradient Descent $\implies$ Công thức cập nhật của logistic regression:
+$$w = w + n(y_i - z_i)x_i $$
+
+\subsection{Softmax Regression}
+
+Trường hợp tổng quát của Logistic Regression
+
+Multi-class Classification
+
+Eg: Picture --> fruits, pets, or human
+
+$Z_g$: vector coordinate: coordinate là số thực
+
+$Z_x$:
+$$p = [p_1, p_2, p_3]$$
+$$0 \leq p_1, p_2, p_3 \leq 1; p_1 + p_2 + p_3 = 1$$
+--> p thuộc một simplex
+
+Algorithms: Sử dụng Sigmoid và Normalization
+$$a_i = \frac{\theta(z_i)}{\sum_{j = 1}^{C}{\theta(z_j)}} , \forall i = 1,2,\dots,C$$
+
+Sử dụng Stochastic Gradient Descent và Cross Entropy: $H(p,q) = - \Sigma p_i log q_i$ $\implies$ Công thức cập nhật của Softmax regression:
+$$W = W + n x_i(y_i - a_i)^T $$
+
+\section{Multi-layer Perceptron}
+
+Tương tự Softmax Regression với nhiều layer $\implies$ non-linear borders
+
+Công thức:
+$$y =  \theta_n(w_n^T*(...\theta_2(w_2^T*\theta_1(w_1^T*x))$$
+
+\end{document}
